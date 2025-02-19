@@ -1,0 +1,10 @@
+.vscode
+exec
+fork
+getpid
+ipc1
+ipc2
+opendir
+stat
+wait
+producer_consumer
