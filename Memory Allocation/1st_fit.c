@@ -4,7 +4,7 @@ void main() {
     int bs[50], ps[50]; 
     int frag[50];       
     int a[50], alloc[50] = {0}; 
-    int i, j, m, n, temp;
+    int i, j, m, n;
 
     
     printf("Enter the number of memory blocks: ");

@@ -18,11 +18,7 @@ int main(){
         p[i].at = 0;
         printf("Enter burst time of p%d : ", i);
         scanf("%d", &p[i].bt);
-
-        p[i].wt = burst;
-        burst += burst + p[i].bt;
-        p[i].tt = p[i].wt + p[i].bt;
-    }P3
+    }
 
     for(i = 0; i < n; i++){
         for(j = i+1; j < n; j++){
