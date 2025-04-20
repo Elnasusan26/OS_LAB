@@ -194,3 +194,65 @@ There are several IPC mechanisms, each with its own characteristics, advantages,
 # [MEMORY ALLOCATION](https://github.com/Ajallen14/OS_LAB/tree/Allen/Memory%20Allocation)
 Memory allocation is a critical aspect of operating system design and management, involving the process of assigning memory resources to various programs and processes during their execution. Efficient memory allocation is essential for optimizing system performance, ensuring that applications have the necessary resources to run, and preventing issues such as fragmentation and memory leaks. Here’s a detailed overview of memory allocation, its types, strategies, and challenges
 
+## [First Fit](https://github.com/Ajallen14/OS_LAB/blob/Allen/Memory%20Allocation/1st_fit.c)
+The **First-Fit** memory allocation strategy is one of the simplest and most commonly used methods for dynamically allocating memory in operating systems. It is particularly useful in managing free memory blocks and efficiently allocating memory to processes. 
+
+### How First-Fit Works
+
+1. **Memory Blocks**: In the First-Fit strategy, the memory is divided into blocks of varying sizes. These blocks can be free (available for allocation) or allocated (currently in use by a process).
+
+2. **Allocation Process**:
+   - When a process requests a certain amount of memory, the memory manager scans the list of free memory blocks from the beginning.
+   - The manager looks for the first block that is large enough to satisfy the request.
+   - Once a suitable block is found, the memory manager allocates the requested amount of memory from that block.
+   - If the block is larger than the requested size, the remaining portion of the block becomes a smaller free block.
+
+3. **Example**:
+   - Consider a memory space divided into blocks of sizes: 100 KB, 500 KB, 200 KB, 300 KB, and 600 KB.
+   - If a process requests 210 KB, the First-Fit strategy will start scanning from the beginning:
+     - It will skip the 100 KB block (too small).
+     - It will skip the 500 KB block (suitable but larger than needed).
+     - It will allocate from the 300 KB block, leaving a remaining free block of 90 KB.
+
+## [Best Fit](https://github.com/Ajallen14/OS_LAB/blob/Allen/Memory%20Allocation/best_fit.c)
+The **Best-Fit** memory allocation strategy is a dynamic memory management technique used in operating systems to allocate memory to processes. This strategy aims to minimize wasted space by finding the smallest available memory block that can satisfy a given allocation request. 
+### How Best-Fit Works
+
+1. **Memory Blocks**: In the Best-Fit strategy, the memory is divided into blocks of varying sizes, which can be either free (available for allocation) or allocated (currently in use by a process).
+
+2. **Allocation Process**:
+   - When a process requests a certain amount of memory, the memory manager scans the list of free memory blocks.
+   - It searches for the smallest block that is large enough to accommodate the requested memory size.
+   - Once the smallest suitable block is found, the memory manager allocates the requested amount of memory from that block.
+   - If the block is larger than the requested size, the remaining portion of the block becomes a smaller free block.
+
+3. **Example**:
+   - Consider a memory space divided into blocks of sizes: 100 KB, 500 KB, 200 KB, 300 KB, and 600 KB.
+   - If a process requests 210 KB, the Best-Fit strategy will scan all free blocks:
+     - It will skip the 100 KB block (too small).
+     - It will skip the 200 KB block (too small).
+     - It will skip the 300 KB block (suitable but larger than needed).
+     - It will allocate from the 500 KB block, leaving a remaining free block of 290 KB.
+
+## [Worst Fit](https://github.com/Ajallen14/OS_LAB/blob/Allen/Memory%20Allocation/worst_fit.c)
+The **Worst-Fit** memory allocation strategy is a dynamic memory management technique used in operating systems to allocate memory to processes. Unlike other strategies that aim to minimize wasted space, Worst-Fit focuses on maximizing the size of the remaining free memory blocks after allocation. 
+
+### How Worst-Fit Works
+
+1. **Memory Blocks**: In the Worst-Fit strategy, the memory is divided into blocks of varying sizes, which can be either free (available for allocation) or allocated (currently in use by a process).
+
+2. **Allocation Process**:
+   - When a process requests a certain amount of memory, the memory manager scans the list of free memory blocks.
+   - It searches for the largest available block that can accommodate the requested memory size.
+   - Once the largest suitable block is found, the memory manager allocates the requested amount of memory from that block.
+   - If the block is larger than the requested size, the remaining portion of the block becomes a smaller free block.
+
+3. **Example**:
+   - Consider a memory space divided into blocks of sizes: 100 KB, 500 KB, 200 KB, 300 KB, and 600 KB.
+   - If a process requests 210 KB, the Worst-Fit strategy will scan all free blocks:
+     - It will skip the 100 KB block (too small).
+     - It will skip the 200 KB block (too small).
+     - It will skip the 300 KB block (suitable but smaller than the largest).
+     - It will allocate from the 600 KB block, leaving a remaining free block of 390 KB.
+
+# 
