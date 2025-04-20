@@ -12,16 +12,33 @@ First-Come, First-Served (FCFS) is one of the simplest scheduling algorithms use
 * **Simplicity**: FCFS is easy to understand and implement. It requires minimal overhead and is straightforward in terms of process management.
 * **Fairness**: Every process gets a chance to execute in the order of arrival, which can be perceived as fair.
 
-## Disadvantages of FCFS
+### Disadvantages of FCFS
 * Convoy Effect*: Shorter processes may have to wait for a long process to complete, leading to increased average waiting time and turnaround time. This is known as the convoy effect.
 * **Non-preemptive**: Since it does not allow preemption, a long-running process can delay all subsequent processes, which can be inefficient in a time-sharing environment.
 * **Poor Performance**: In scenarios with a mix of short and long processes, FCFS can lead to poor performance metrics compared to other scheduling algorithms.
 
 
 ## [Priority](https://github.com/Ajallen14/OS_LAB/blob/Allen/CPU%20scheduling/priority.c)
+Priority scheduling is a CPU scheduling algorithm that assigns a priority level to each process, determining the order in which processes are executed based on their priority. The process with the highest priority is selected for execution first. If two processes have the same priority, they may be scheduled using a secondary criterion, such as First-Come First-Served (FCFS).
 
+### How Priority Scheduling Works
+* **Priority Assignment**: Each process is assigned a priority value, which can be based on various factors such as importance, urgency, or resource requirements. The priority can be static (fixed) or dynamic (changing over time).
+
+* **Queue Structure**: Processes are maintained in a priority queue. The CPU scheduler selects the process with the highest priority from this queue for execution.
+
+* **Execution Order**: The CPU executes the highest-priority process first. If a new process arrives with a higher priority than the currently running process, the current process may be preempted (if the scheduling is preemptive) and the new process will be executed.
 
 ## [Round Robin](https://github.com/Ajallen14/OS_LAB/blob/Allen/CPU%20scheduling/round_robin.c)
+Round Robin (RR) is a widely used CPU scheduling algorithm that is particularly effective in time-sharing systems. It is designed to provide fair allocation of CPU time to all processes in the ready queue, ensuring that each process gets an equal opportunity to execute.
 
+### How Round Robin Works
+* **Time Quantum**: Round Robin scheduling operates on the principle of time slices or time quanta. A fixed time quantum (e.g., 10 milliseconds) is defined, which determines how long a process can run before it is preempted.
 
-## [Shortest](https://github.com/Ajallen14/OS_LAB/blob/Allen/CPU%20scheduling/shortest.c)
+* **Queue Structure**: Processes are maintained in a circular queue. When a process arrives, it is added to the end of the queue.
+
+* **Execution Order**: The CPU scheduler picks the first process in the queue and allows it to execute for a duration equal to the time quantum. If the process completes its execution within this time, it is removed from the queue. If it does not complete, it is preempted and moved to the back of the queue, allowing the next process in line to execute.
+
+* **Cyclic Nature**: This process continues in a cyclic manner until all processes are completed. Each process gets a chance to execute in a round-robin fashion, hence the name
+
+## [Shortest Job First](https://github.com/Ajallen14/OS_LAB/blob/Allen/CPU%20scheduling/shortest.c)
+
