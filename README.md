@@ -119,3 +119,78 @@ First-Come, First-Served (FCFS) is one of the simplest disk scheduling algorithm
 * **Order of Service**: The disk scheduler services requests in the exact order they arrive. The first request in the queue is the first to be processed, followed by the second request, and so on.
 
 * **No Preemption**: Once the disk head starts servicing a request, it will complete that request before moving on to the next one. There is no preemption in FCFS; the disk head will not switch to another request until the current one is finished.
+
+## [Scan](https://github.com/Ajallen14/OS_LAB/blob/Allen/Disk%20Scheduling/scan.c)
+The SCAN disk scheduling algorithm, also known as the elevator algorithm, is a widely used method for managing disk I/O requests in operating systems. It is designed to optimize the movement of the disk arm (or head) to reduce the average seek time and improve overall system performance. Here’s a detailed explanation of how the SCAN algorithm works, its advantages, disadvantages, and applications.
+
+### How SCAN Works
+
+1. **Movement Direction**: The SCAN algorithm moves the disk arm in one direction (either towards the outer edge of the disk or towards the inner edge) and services all requests in that direction until it reaches the end of the disk.
+
+2. **Service Requests**: As the disk arm moves, it services all pending requests in the path of its movement. Once it reaches the end of the disk, it reverses direction and services requests on the way back.
+
+3. **Example**: 
+   - Consider a disk with tracks numbered from 0 to 199 and the current position of the disk head at track 100. 
+   - If the pending requests are for tracks 30, 60, 10, 120, 150, and 180, the SCAN algorithm will service the requests in the following order:
+     - Move from track 100 to track 120, then to 150, and finally to 180 (servicing requests in the upward direction).
+     - After reaching track 180, the disk arm will reverse direction and move back to track 0, servicing requests for tracks 60, 30, and 10 on the way back.
+
+## [C-Scan](https://github.com/Ajallen14/OS_LAB/blob/Allen/Disk%20Scheduling/c_scan.c)
+C-SCAN (Circular SCAN) is a disk scheduling algorithm that is a variant of the SCAN algorithm. It is designed to optimize the servicing of disk I/O requests while minimizing the average wait time and ensuring a more uniform response time for requests. C-SCAN operates on the principle of treating the disk as a circular structure, which helps in providing a more predictable performance for disk access. Here’s a detailed explanation of how C-SCAN works, its advantages, disadvantages, and applications.
+
+### How C-SCAN Works
+
+1. **Movement Direction**: Similar to the SCAN algorithm, C-SCAN moves the disk arm in one direction (either towards the outer edge or the inner edge of the disk) and services all requests in that direction.
+
+2. **Service Requests**: As the disk arm moves, it services all pending requests in its path. Once it reaches the end of the disk, instead of reversing direction and servicing requests on the way back (as in SCAN), the C-SCAN algorithm jumps back to the beginning of the disk without servicing any requests during this return trip.
+
+3. **Example**:
+   - Consider a disk with tracks numbered from 0 to 199 and the current position of the disk head at track 100.
+   - If the pending requests are for tracks 30, 60, 10, 120, 150, and 180, the C-SCAN algorithm will service the requests in the following order:
+     - Move from track 100 to track 120, then to 150, and finally to 180 (servicing requests in the upward direction).
+     - After reaching track 180, the disk arm jumps back to track 0 without servicing any requests.
+     - It then continues servicing requests in the upward direction again, starting from track 0.
+
+# [INTER PROCESS COMMUNICATION](https://github.com/Ajallen14/OS_LAB/tree/Allen/Inter%20Process%20Communication)
+Inter-Process Communication (IPC) refers to the mechanisms and methods that allow processes to communicate and synchronize their actions while executing concurrently. Since processes in an operating system can run independently and may not share memory, IPC is essential for enabling them to exchange data, coordinate their activities, and share resources effectively. IPC is crucial in multi-process systems, where multiple processes may need to work together to complete a task.
+
+### Types of Inter-Process Communication
+
+There are several IPC mechanisms, each with its own characteristics, advantages, and use cases. The main types of IPC include:
+
+1. **Shared Memory**:
+   - **Description**: In shared memory IPC, multiple processes can access a common memory segment. One process writes data to the shared memory, and other processes can read from it.
+   - **Advantages**: Fast communication since data does not need to be copied between processes; efficient for large amounts of data.
+   - **Disadvantages**: Requires synchronization mechanisms (like semaphores or mutexes) to prevent race conditions and ensure data consistency.
+
+2. **Message Passing**:
+   - **Description**: Processes communicate by sending and receiving messages. This can be done through various methods, such as message queues, mailboxes, or sockets.
+   - **Advantages**: Simplifies synchronization since messages are sent and received in a controlled manner; suitable for distributed systems.
+   - **Disadvantages**: Overhead due to message copying; may be slower than shared memory for large data transfers.
+
+3. **Pipes**:
+   - **Description**: Pipes provide a unidirectional communication channel between processes. Data written to a pipe by one process can be read by another process.
+   - **Types**:
+     - **Anonymous Pipes**: Used for communication between related processes (e.g., parent and child).
+     - **Named Pipes (FIFOs)**: Can be used for communication between unrelated processes and are identified by a name in the file system.
+   - **Advantages**: Simple to use; suitable for streaming data.
+   - **Disadvantages**: Limited to unidirectional communication (for anonymous pipes); may require synchronization.
+
+4. **Sockets**:
+   - **Description**: Sockets provide a way for processes to communicate over a network. They can be used for both local and remote communication.
+   - **Advantages**: Flexible and powerful; can be used for communication between processes on different machines.
+   - **Disadvantages**: More complex to implement; involves network overhead.
+
+5. **Signals**:
+   - **Description**: Signals are a limited form of IPC used to notify a process that a specific event has occurred. For example, a process can send a signal to another process to indicate that it should terminate or handle an event.
+   - **Advantages**: Lightweight and efficient for simple notifications.
+   - **Disadvantages**: Limited in terms of data transfer; can be difficult to manage and handle.
+
+6. **Semaphores**:
+   - **Description**: Semaphores are synchronization primitives used to control access to shared resources. They can be used to signal between processes and manage resource allocation.
+   - **Advantages**: Effective for preventing race conditions and ensuring mutual exclusion.
+   - **Disadvantages**: Can lead to complexity in managing multiple semaphores; potential for deadlocks if not used carefully.
+
+# [MEMORY ALLOCATION](https://github.com/Ajallen14/OS_LAB/tree/Allen/Memory%20Allocation)
+Memory allocation is a critical aspect of operating system design and management, involving the process of assigning memory resources to various programs and processes during their execution. Efficient memory allocation is essential for optimizing system performance, ensuring that applications have the necessary resources to run, and preventing issues such as fragmentation and memory leaks. Here’s a detailed overview of memory allocation, its types, strategies, and challenges
+
