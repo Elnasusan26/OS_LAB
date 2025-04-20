@@ -255,4 +255,13 @@ The **Worst-Fit** memory allocation strategy is a dynamic memory management tech
      - It will skip the 300 KB block (suitable but smaller than the largest).
      - It will allocate from the 600 KB block, leaving a remaining free block of 390 KB.
 
-# 
+# [PAGE REPLACEMENT](https://github.com/Ajallen14/OS_LAB/tree/Allen/Page%20Replacement%20Algorithm)
+**Page replacement** is a crucial concept in operating systems, particularly in the context of virtual memory management. It refers to the process of swapping out a page of memory that is currently in use to make room for a new page that needs to be loaded into memory. This is necessary when the physical memory (RAM) is full, and a process requires more memory than is currently available. 
+
+### Virtual Memory and Paging
+
+1. **Virtual Memory**: Virtual memory is a memory management technique that allows an operating system to use disk space as an extension of RAM. It enables processes to use more memory than is physically available by swapping pages in and out of physical memory.
+
+2. **Paging**: In paging, the virtual memory is divided into fixed-size blocks called **pages**, while the physical memory is divided into blocks of the same size called **frames**. When a process is executed, its pages are loaded into available frames in physical memory.
+
+## [First Come First Serve](https://github.com/Ajallen14/OS_LAB/blob/Allen/Page%20Replacement%20Algorithm/fifo.c)
