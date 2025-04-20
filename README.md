@@ -49,3 +49,36 @@ Shortest Job First (SJF) is a CPU scheduling algorithm that selects the process 
 * **Non-Preemptive SJF**: Once a process starts executing, it cannot be interrupted until it completes. If a new process arrives with a shorter burst time than the currently running process, it will have to wait until the current process finishes.
 
 * **Preemptive SJF (Shortest Remaining Time First)**: In this variant, if a new process arrives with a shorter burst time than the remaining time of the currently running process, the CPU will preempt the current process and allocate the CPU to the new process.
+
+# [DEADLOCK](https://github.com/Ajallen14/OS_LAB/tree/Allen/Deadlock)
+
+## [Banker's Algorithm](https://github.com/Ajallen14/OS_LAB/blob/Allen/Deadlock/deadlock_detection.c)
+The Banker's Algorithm is a resource allocation and deadlock avoidance algorithm used in operating systems to manage multiple processes and ensure that they do not enter a deadlock state. It was developed by Edsger Dijkstra and is named for its analogy to a banking system, where the bank must ensure that it has enough resources available to satisfy the maximum needs of all customers (processes) without running into a deadlock.
+
+How the Banker's Algorithm Works
+The Banker's Algorithm operates in two main phases: Resource Request and Safety Check.
+
+1. Resource Request
+    When a process requests resources, the algorithm checks if the request can be granted without leading the system into an unsafe state. The steps are as follows:
+    * Check Request Validity: Ensure that the requested resources do not exceed the maximum claim of the process and that the requested resources are available.
+    ```
+    if (Request[i][j] <= Need[i][j]) and (Request[i][j] <= Available[j]) then
+    ```
+    * Pretend to Allocate: Temporarily allocate the requested resources to the process and update the state:
+
+        * Update the Available vector.
+        * Update the Allocation matrix.
+        * Update the Need matrix.
+    * Safety Check: After the temporary allocation, check if the system is in a safe state using the safety algorithm (described below). If the system is safe, grant the request; otherwise, roll back the changes and deny the request.
+2. Safety Check
+    The safety algorithm checks if there exists a sequence of processes that can finish executing without leading to a deadlock. The steps are as follows:
+    
+    * **Initialization**: Create a Work vector initialized to the Available resources and a Finish array initialized to false for all processes.
+    
+    * **Find a Process**: Look for a process that can finish with the current Work resources (i.e., its Need can be satisfied by Work).
+
+    * Simulate Execution: If such a process is found:
+
+        * Assume it finishes and add its allocated resources back to Work.
+        * Mark the process as finished.
+    * Repeat: Continue this process until either all processes are finished (safe state) or no further processes can be found (unsafe state).
