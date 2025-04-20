@@ -51,8 +51,21 @@ Shortest Job First (SJF) is a CPU scheduling algorithm that selects the process 
 * **Preemptive SJF (Shortest Remaining Time First)**: In this variant, if a new process arrives with a shorter burst time than the remaining time of the currently running process, the CPU will preempt the current process and allocate the CPU to the new process.
 
 # [DEADLOCK](https://github.com/Ajallen14/OS_LAB/tree/Allen/Deadlock)
+Deadlock is a situation in a multiprogramming environment where two or more processes are unable to proceed because each is waiting for the other to release resources. In other words, a deadlock occurs when a set of processes is blocked because each process is holding a resource and waiting for another resource that is held by another process. This can lead to a complete halt in the execution of the involved processes, resulting in a system that is effectively frozen for those processes.
 
-## [Banker's Algorithm](https://github.com/Ajallen14/OS_LAB/blob/Allen/Deadlock/deadlock_detection.c)
+### Conditions for Deadlock
+
+For a deadlock to occur, four necessary conditions must hold simultaneously:
+
+1. **Mutual Exclusion**: At least one resource must be held in a non-shareable mode. If another process requests that resource, the requesting process must be delayed until the resource is released.
+
+2. **Hold and Wait**: A process holding at least one resource is waiting to acquire additional resources that are currently being held by other processes.
+
+3. **No Preemption**: Resources cannot be forcibly taken from a process holding them. A resource can only be released voluntarily by the process holding it after it has completed its task.
+
+4. **Circular Wait**: There exists a set of processes \(\{P_1, P_2, \ldots, P_n\}\) such that \(P_1\) is waiting for a resource held by \(P_2\), \(P_2\) is waiting for a resource held by \(P_3\), and so on, with \(P_n\) waiting for a resource held by \(P_1\), forming a circular chain.
+
+## [Banker's Algorithm](https://github.com/Ajallen14/OS_LAB/blob/Allen/Deadlock/Bankers_algorithm.c)
 The Banker's Algorithm is a resource allocation and deadlock avoidance algorithm used in operating systems to manage multiple processes and ensure that they do not enter a deadlock state. It was developed by Edsger Dijkstra and is named for its analogy to a banking system, where the bank must ensure that it has enough resources available to satisfy the maximum needs of all customers (processes) without running into a deadlock.
 
 How the Banker's Algorithm Works
@@ -82,3 +95,27 @@ The Banker's Algorithm operates in two main phases: Resource Request and Safety 
         * Assume it finishes and add its allocated resources back to Work.
         * Mark the process as finished.
     * Repeat: Continue this process until either all processes are finished (safe state) or no further processes can be found (unsafe state).
+
+
+# [DISK SCHEDULING](https://github.com/Ajallen14/OS_LAB/tree/Allen/Disk%20Scheduling)
+Disk scheduling is a crucial aspect of operating system design that manages how disk I/O requests are handled. Since disk access times are significantly slower than CPU processing times, efficient disk scheduling is essential for optimizing system performance and ensuring that processes can access data quickly and efficiently.
+
+### Importance of Disk Scheduling
+
+1. **Performance Optimization**: Disk scheduling algorithms aim to minimize the average wait time and seek time for disk I/O operations, which can significantly improve overall system performance.
+
+2. **Resource Management**: Efficient disk scheduling helps manage the limited resources of the disk subsystem, ensuring that multiple processes can access the disk without causing bottlenecks.
+
+3. **Fairness**: Disk scheduling algorithms can help ensure that all processes get a fair chance to access the disk, preventing starvation of any particular process.
+
+4. **Throughput Improvement**: By optimizing the order of disk requests, disk scheduling can increase the number of requests serviced in a given time period, improving overall throughput.
+
+## [First Come First Serve](https://github.com/Ajallen14/OS_LAB/blob/Allen/Disk%20Scheduling/fcfs.c)
+First-Come, First-Served (FCFS) is one of the simplest disk scheduling algorithms used in operating systems to manage disk I/O requests. It operates on a straightforward principle: the disk scheduler services requests in the order they arrive in the queue.
+
+### How FCFS Disk Scheduling Works
+* **Request Queue**: When processes request access to the disk, these requests are placed in a queue. Each request typically specifies the track number on the disk that needs to be accessed.
+
+* **Order of Service**: The disk scheduler services requests in the exact order they arrive. The first request in the queue is the first to be processed, followed by the second request, and so on.
+
+* **No Preemption**: Once the disk head starts servicing a request, it will complete that request before moving on to the next one. There is no preemption in FCFS; the disk head will not switch to another request until the current one is finished.
