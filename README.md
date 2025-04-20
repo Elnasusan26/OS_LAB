@@ -41,4 +41,11 @@ Round Robin (RR) is a widely used CPU scheduling algorithm that is particularly 
 * **Cyclic Nature**: This process continues in a cyclic manner until all processes are completed. Each process gets a chance to execute in a round-robin fashion, hence the name
 
 ## [Shortest Job First](https://github.com/Ajallen14/OS_LAB/blob/Allen/CPU%20scheduling/shortest.c)
+Shortest Job First (SJF) is a CPU scheduling algorithm that selects the process with the smallest execution time (or burst time) to execute next. It is designed to minimize the average waiting time and turnaround time for a set of processes. SJF can be implemented in two ways: non-preemptive and preemptive.
 
+### How Shortest Job First Works
+* **Process Selection**: In SJF, the scheduler selects the process with the shortest burst time from the ready queue. This means that the process that requires the least amount of CPU time will be executed first.
+
+* **Non-Preemptive SJF**: Once a process starts executing, it cannot be interrupted until it completes. If a new process arrives with a shorter burst time than the currently running process, it will have to wait until the current process finishes.
+
+* **Preemptive SJF (Shortest Remaining Time First)**: In this variant, if a new process arrives with a shorter burst time than the remaining time of the currently running process, the CPU will preempt the current process and allocate the CPU to the new process.
